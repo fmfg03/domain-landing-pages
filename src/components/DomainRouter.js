@@ -24,7 +24,7 @@ const DomainRouter = () => {
   }, []);
 
   if (!domainInfo) {
-    return React.createElement("div", null, "Loading...");
+    return <div>Loading...</div>;
   }
 
   const { domain, config } = domainInfo;
@@ -32,47 +32,37 @@ const DomainRouter = () => {
   
   // Check if we're on a preserved path
   if (config.type === 'preserve' && preservedPaths.some(p => currentPath.startsWith(p))) {
-    return React.createElement(
-      "div", 
-      { className: "container mx-auto p-4" },
-      React.createElement(
-        "div", 
-        { className: "bg-white rounded-lg shadow p-6" },
-        React.createElement("h1", { className: "text-2xl font-bold mb-4" }, domain),
-        React.createElement(
-          "div", 
-          { className: "mb-4" },
-          React.createElement("h2", { className: "text-xl" }, "Current path: ", currentPath)
-        ),
-        React.createElement(
-          "nav", 
-          { className: "space-y-2" },
-          preservedPaths.map(path => 
-            React.createElement(
-              "a",
-              {
-                key: path,
-                href: path,
-                className: "block p-2 hover:bg-gray-100 rounded transition"
-              },
-              path
-            )
-          )
-        )
-      )
+    return (
+      <div className="container mx-auto p-4">
+        <div className="bg-white rounded-lg shadow p-6">
+          <h1 className="text-2xl font-bold mb-4">{domain}</h1>
+          <div className="mb-4">
+            <h2 className="text-xl">Current path: {currentPath}</h2>
+          </div>
+          <nav className="space-y-2">
+            {preservedPaths.map(path => (
+              <a 
+                key={path}
+                href={path}
+                className="block p-2 hover:bg-gray-100 rounded transition"
+              >
+                {path}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </div>
     );
   }
 
-  return React.createElement(
-    "div", 
-    { className: "container mx-auto p-4" },
-    React.createElement(
-      "div", 
-      { className: "bg-white rounded-lg shadow p-6 text-center" },
-      React.createElement("h1", { className: "text-2xl font-bold mb-4" }, domain),
-      React.createElement("p", { className: "mb-4" }, "Redirecting you to our main site..."),
-      React.createElement("div", { className: "animate-pulse" }, "Loading...")
-    )
+  return (
+    <div className="container mx-auto p-4">
+      <div className="bg-white rounded-lg shadow p-6 text-center">
+        <h1 className="text-2xl font-bold mb-4">{domain}</h1>
+        <p className="mb-4">Redirecting you to our main site...</p>
+        <div className="animate-pulse">Loading...</div>
+      </div>
+    </div>
   );
 };
 
