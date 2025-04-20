@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DomainLanding from './components/DomainLanding.jsx';
+import DomainRouter from './components/DomainRouter';
+
 const container = document.getElementById('root');
 const root = createRoot(container);
-root.render(React.createElement(DomainLanding));
+root.render(React.createElement(DomainRouter));
